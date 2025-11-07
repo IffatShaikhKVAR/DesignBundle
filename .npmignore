@@ -1,0 +1,13 @@
+src/
+*.ts
+!*.d.ts
+.git
+.gitignore
+.env
+.vscode
+node_modules/
+tsconfig.json
+vite.config.ts
+README_DEV.md
+.DS_Store
+*.log
