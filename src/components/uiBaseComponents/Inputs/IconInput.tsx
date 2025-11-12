@@ -22,7 +22,7 @@ import {
  * Built using MUI InputAdornment and your BaseInput
  */
 
-// 👤 Name Input with Icon
+// 👤 Name Input with Icon (All Variants)
 export const IconNameInput: React.FC<BaseInputProps> = (props) => (
   <BaseInput
     {...props}
@@ -38,7 +38,7 @@ export const IconNameInput: React.FC<BaseInputProps> = (props) => (
   />
 );
 
-// ✉️ Email Input with Icon
+// ✉️ Email Input with Icon (All Variants)
 export const IconEmailInput: React.FC<BaseInputProps> = (props) => (
   <BaseInput
     {...props}
@@ -55,7 +55,7 @@ export const IconEmailInput: React.FC<BaseInputProps> = (props) => (
   />
 );
 
-// 🔍 Search Input
+// 🔍 Search Input (All Variants)
 export const IconSearchInput: React.FC<BaseInputProps> = (props) => (
   <BaseInput
     {...props}
@@ -71,9 +71,17 @@ export const IconSearchInput: React.FC<BaseInputProps> = (props) => (
   />
 );
 
-// 🔒 Password Input with visibility toggle
+// 🔒 Password Input with Lock icon and visibility toggle (All Variants)
 export const IconPasswordInput: React.FC<BaseInputProps> = (props) => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
 
   return (
     <BaseInput
@@ -84,12 +92,17 @@ export const IconPasswordInput: React.FC<BaseInputProps> = (props) => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <Lock />
+            <Lock sx={{ color: "text.secondary" }} />
           </InputAdornment>
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton onClick={() => setShowPassword((prev) => !prev)} edge="end">
+            <IconButton
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+              edge="end"
+              aria-label="toggle password visibility"
+            >
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
@@ -99,24 +112,8 @@ export const IconPasswordInput: React.FC<BaseInputProps> = (props) => {
   );
 };
 
-// 📅 Date Input with Icon
-export const IconDateInput: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    type="date"
-    label="Select Date"
-    InputLabelProps={{ shrink: true }}
-    InputProps={{
-      startAdornment: (
-        <InputAdornment position="start">
-          <CalendarToday />
-        </InputAdornment>
-      ),
-    }}
-  />
-);
 
-// 📞 Phone Number Input
+// 📞 Phone Number Input (All Variants)
 export const IconPhoneInput: React.FC<BaseInputProps> = (props) => (
   <BaseInput
     {...props}

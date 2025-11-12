@@ -3,13 +3,23 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import SidebarLayout from "./layout/SidebarLayout";
 
 // Demo pages
-import ButtonDemo from "../document/Demo/ButtonDemo";
-import InputDemo from "../document/Demo/InputDemo";
-import CheckboxDemo from "../document/Demo/CheckboxDemo"; // ✅ Add this line when you have CheckboxDemo
-import DropdownDemo from "../document/Demo/DropdownDemo";
-import ToggleDemo from "../document/Demo/ToggleDemo";
-import ProgressDemo from "../document/Demo/ProgressDemo";
-// import TypographyDemo from "../document/Demo/TypographyDemo"; // Uncomment when ready
+import ButtonDemo from "../document/Demo/BaseComponents/ButtonDemo";
+import InputDemo from "../document/Demo/BaseComponents/InputDemo";
+import CheckboxDemo from "../document/Demo/BaseComponents/CheckboxDemo"; // ✅ Add this line when you have CheckboxDemo
+import DropdownDemo from "../document/Demo/BaseComponents/DropdownDemo";
+import ToggleDemo from "./Demo/BaseComponents/ToggleDemo";
+import ProgressDemo from "../document/Demo/feedbackComponents/ProgressDemo";
+import TypographyDemo from "../document/Demo/DataDisplay/TypographyDemo"; // Uncomment when ready
+import CardDemo from "./Demo/Surface/CardDemo";
+import SidebarDemo from "./Demo/Surface/SidebarDemo";
+import AppBarDemo from "./Demo/Surface/AppBarDemo";
+import TableDemo from "../document/Demo/DataDisplay/TableDemo";
+import DividerDemo from "../document/Demo/DataDisplay/DividerDemo";
+import BadgeDemo from "../document/Demo/DataDisplay/BadgeDemo";
+import CalenderDemo from "../document/Demo/DataDisplay/CalenderDemo";
+import AlertDemo from "../document/Demo/feedbackComponents/AlertDemo";
+import ModalDemo from "../document/Demo/Surface/ModalDemo";
+import PaginationDemo from "../document/Demo/Surface/PaginationDemo";
 
 const App: React.FC = () => {
   return (
@@ -25,11 +35,18 @@ const App: React.FC = () => {
         <Route path="dropdown" element={<DropdownDemo />} />
         <Route path="toggle" element={<ToggleDemo />} />
         <Route path="progress" element={<ProgressDemo />} />
-
-        {/* <Route path="typography" element={<TypographyDemo />} /> */}
-
+        <Route path="alerts" element={<AlertDemo />} />
+        <Route path="typography" element={<TypographyDemo />} />
+        <Route path="table" element={<TableDemo />} />
+        <Route path="divider" element={<DividerDemo />} />
+        <Route path="badge" element={<BadgeDemo />} />
+        <Route path="calender" element={<CalenderDemo />} />
+        <Route path="sideBar" element={<SidebarDemo />} />
+        <Route path="appBar" element={<AppBarDemo />} />
+        <Route path="modal" element={<ModalDemo />} />
+        <Route path="pagination" element={<PaginationDemo />} />
         {/* Placeholder route */}
-        <Route path="card" element={<h3>Card demo coming soon...</h3>} />
+        <Route path="card" element={<CardDemo />} />
 
         {/* Catch-all fallback */}
         <Route path="*" element={<Navigate to="/button" replace />} />

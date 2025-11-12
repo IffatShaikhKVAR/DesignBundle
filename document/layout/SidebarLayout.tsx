@@ -23,30 +23,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import FunctionsIcon from "@mui/icons-material/Functions";
-import InputIcon from "@mui/icons-material/Input";
-import TextFieldsIcon from "@mui/icons-material/TextFields";
-import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
-import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useThemeMode } from "../../src/theme/AppTheme";
 
+// ✅ Import categories from external file
+import { categories } from "./SidebarConfig";
+
 const drawerWidth = 260;
-
-interface NavItem {
-  text: string;
-  path: string;
-  icon: React.ReactNode;
-  description?: string;
-}
-
-interface Category {
-  title: string;
-  items: NavItem[];
-}
 
 const SidebarLayout: React.FC = () => {
   const location = useLocation();
@@ -54,26 +38,7 @@ const SidebarLayout: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isDark, toggleTheme } = useThemeMode();
-
-  // --- Categories with Nested Items ---
-  const categories: Category[] = [
-    {
-      title: "Base Components",
-      items: [
-        { text: "Buttons", path: "/button", icon: <FunctionsIcon /> },
-        { text: "Inputs", path: "/input", icon: <InputIcon /> },
-        { text: "Radio Buttons", path: "/radio", icon: <RadioButtonCheckedIcon /> },
-        { text: "Checkboxes", path: "/checkbox", icon: <CheckBoxIcon /> },
-        { text: "Dropdowns", path: "/dropdown", icon: <ArrowDropDownCircleIcon /> },
-        { text: "Typography", path: "/typography", icon: <TextFieldsIcon /> },
-        { text: "Cards", path: "/card", icon: <CardGiftcardIcon /> },
-        { text: "Toggle", path: "/toggle", icon: <CardGiftcardIcon /> },
-        // { text: "Progress Indicatior", path: "/progress", icon: <CardGiftcardIcon /> }
-      ],
-    },
-  ];
-
-  const [openCategory, setOpenCategory] = useState<string | null>("Create Components");
+  const [openCategory, setOpenCategory] = useState<string | null>("Base Components");
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -83,10 +48,9 @@ const SidebarLayout: React.FC = () => {
     setOpenCategory((prev) => (prev === title ? null : title));
   };
 
-  // Sidebar Content
+  // Sidebar content (no logic change)
   const drawerContent = (
     <>
-      {/* Header */}
       <Box
         sx={{
           background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
@@ -123,7 +87,7 @@ const SidebarLayout: React.FC = () => {
           Design System
         </Typography>
         <Typography variant="caption" sx={{ opacity: 0.9 }}>
-          Component Library 
+          Component Library
         </Typography>
       </Box>
 
@@ -284,8 +248,12 @@ const SidebarLayout: React.FC = () => {
             width: drawerWidth,
             boxSizing: "border-box",
             borderRight: `1px solid ${theme.palette.divider}`,
-            position: isMobile ? "fixed" : "relative",
-            height: "100%",
+            position: "fixed", // ✅ Make sidebar fixed
+            top: 0,
+            left: 0,
+            height: "100vh", // ✅ Full height
+            display: "flex",
+            flexDirection: "column",
           },
         }}
       >
