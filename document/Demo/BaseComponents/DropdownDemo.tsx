@@ -84,7 +84,7 @@ export const DropdownDemo: React.FC = () => {
   return (
     <ComponentDemo 
       categories={dropdownCategories}
-      packageName="design-bundle"
+      packageName="design-bundle@latest"
     />
   );
 };

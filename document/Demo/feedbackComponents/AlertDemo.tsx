@@ -339,7 +339,7 @@ const AlertDemo: React.FC = () => {
   return (
     <ComponentDemo 
       categories={alertCategories} 
-      packageName="design-bundle"
+      packageName="design-bundle@latest"
     />
   );
 };

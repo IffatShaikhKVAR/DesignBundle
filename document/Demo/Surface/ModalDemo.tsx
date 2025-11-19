@@ -242,7 +242,7 @@ const modalCategories: DemoCategory[] = [
 // ========================================
 
 const ModalDemo: React.FC = () => {
-  return <ComponentDemo categories={modalCategories} packageName="design-bundle" />;
+  return <ComponentDemo categories={modalCategories} packageName="design-bundle@latest" />;
 };
 
 export default ModalDemo;

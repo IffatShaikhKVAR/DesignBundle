@@ -1,32 +1,42 @@
 // components/Charts/BaseChart.tsx
 import React from "react";
-import { Box, Typography, Paper } from "@mui/material";
+import { Paper, Typography, Box } from "@mui/material";
 
 export interface BaseChartProps {
   title?: string;
-  data: any[];
+  data?: any[];
   height?: number;
+  width?: string | number;
   showLegend?: boolean;
   showGrid?: boolean;
+  children?: React.ReactNode;
 }
 
-/**
- * BaseChart Component
- * Base wrapper for all chart components with title and styling
- */
-export const BaseChart: React.FC<BaseChartProps & { children: React.ReactNode }> = ({
+const BaseChart: React.FC<BaseChartProps> = ({
   title,
-  height = 400,
   children,
+  height = 400,
+  width = "100%",
 }) => {
   return (
-    <Paper sx={{ p: 2, borderRadius: 2, boxShadow: 1 }}>
+    <Paper
+      elevation={3}
+      sx={{
+        p: 2,
+        border: "1px solid #e0e0e0",
+        borderRadius: 3,
+        width,
+        // Remove maxWidth constraint - let it expand
+        mx: "auto",
+        my: 2,
+      }}
+    >
       {title && (
-        <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+        <Typography variant="h6" textAlign="center" mb={2}>
           {title}
         </Typography>
       )}
-      <Box sx={{ width: "100%", height }}>
+      <Box sx={{ width: "100%", height, overflow: "visible" }}>
         {children}
       </Box>
     </Paper>

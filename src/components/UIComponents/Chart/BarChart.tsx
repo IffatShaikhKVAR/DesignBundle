@@ -1,5 +1,5 @@
 // components/Charts/BarChart.tsx
-import React from "react";
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -32,13 +32,13 @@ export const BarChartComponent: React.FC<BarChartProps> = ({
   dataKey,
   height = 400,
   fill = "#2575fc",
-  barSize = 60,
+  barSize = 100,
   showLegend = true,
   showGrid = true,
 }) => {
   return (
     <BaseChart title={title} data={data} height={height}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="95%" height="100%">
         <BarChart data={data} barSize={barSize}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" />}
           <XAxis dataKey="name" />
@@ -76,7 +76,7 @@ export const StackedBarChartComponent: React.FC<StackedBarChartProps> = ({
 }) => {
   return (
     <BaseChart title={title} data={data} height={height}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="95%" height="100%">
         <BarChart data={data}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" />}
           <XAxis dataKey="name" />
@@ -97,8 +97,80 @@ export const StackedBarChartComponent: React.FC<StackedBarChartProps> = ({
   );
 };
 
+// -------------------------------
+// 🎚️ Interactive Stacked Bar Chart Component (with toggle)
+// -------------------------------
+export interface InteractiveStackedBarChartProps extends BaseChartProps {
+  dataKeys: string[];
+  colors?: string[];
+}
+
+/**
+ * InteractiveStackedBarChart Component
+ * Stacked bars with clickable legend to toggle data visibility
+ * Click on any legend item to hide/show that bar segment
+ */
+export const InteractiveStackedBarChartComponent: React.FC<
+  InteractiveStackedBarChartProps
+> = ({
+  title,
+  data,
+  dataKeys,
+  height = 400,
+  colors = ["#ef4444", "#f97316", "#2575fc", "#22c55e"],
+  showLegend = true,
+  showGrid = true,
+}) => {
+  const [visibleBars, setVisibleBars] = useState<Set<string>>(
+    new Set(dataKeys)
+  );
+
+  const handleLegendClick = (e: any) => {
+    const newVisible = new Set(visibleBars);
+    if (newVisible.has(e.dataKey)) {
+      newVisible.delete(e.dataKey);
+    } else {
+      newVisible.add(e.dataKey);
+    }
+    setVisibleBars(newVisible);
+  };
+
+  return (
+    <BaseChart title={title} data={data} height={height}>
+      <ResponsiveContainer width="95%" height="100%">
+        <BarChart data={data}>
+          {showGrid && <CartesianGrid strokeDasharray="3 3" />}
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          {showLegend && (
+            <Legend
+              onClick={handleLegendClick}
+              wrapperStyle={{ cursor: "pointer" }}
+            />
+          )}
+          {dataKeys.map((key, index) => {
+            // Only render bar if it's in the visible set
+            if (!visibleBars.has(key)) return null;
+
+            return (
+              <Bar
+                key={key}
+                dataKey={key}
+                fill={colors[index % colors.length]}
+                stackId="stack"
+                isAnimationActive={true}
+              />
+            );
+          })}
+        </BarChart>
+      </ResponsiveContainer>
+    </BaseChart>
+  );
+};
 
 export const BarCharts = {
-StackedBarChartComponent,
-BarChartComponent
-}
+  StackedBarChartComponent,
+  BarChartComponent,
+  InteractiveStackedBarChartComponent,
+};

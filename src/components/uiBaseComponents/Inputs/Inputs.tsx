@@ -73,42 +73,6 @@ export const EmailInputFilled: React.FC<BaseInputProps> = (props) => (
   />
 );
 
-// ============================================
-// PASSWORD INPUT - DIFFERENT VARIANTS
-// ============================================
-
-// Standard Variant
-export const PasswordInput: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    type="password"
-    label="Password"
-    placeholder="Enter password"
-    variantType="standard"
-  />
-);
-
-// Outlined Variant
-export const PasswordInputOutlined: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    type="password"
-    label="Password"
-    placeholder="Enter password"
-    variantType="outlined"
-  />
-);
-
-// Filled Variant
-export const PasswordInputFilled: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    type="password"
-    label="Password"
-    placeholder="Enter password"
-    variantType="filled"
-  />
-);
 
 
 
@@ -190,85 +154,6 @@ export const PhoneInputFilled: React.FC<BaseInputProps> = (props) => (
 
 
 
-// ============================================
-// DESCRIPTION INPUT - DIFFERENT VARIANTS
-// ============================================
-
-// Standard Variant
-export const DescriptionInput: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    label="Description"
-    placeholder="Enter description..."
-    variantType="standard"
-    multiline
-    rows={4}
-    fullWidth
-  />
-);
-
-// Outlined Variant
-export const DescriptionInputOutlined: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    label="Description"
-    placeholder="Enter description..."
-    variantType="outlined"
-    multiline
-    rows={4}
-    fullWidth
-  />
-);
-
-// Filled Variant
-export const DescriptionInputFilled: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    label="Description"
-    placeholder="Enter description..."
-    variantType="filled"
-    multiline
-    rows={4}
-    fullWidth
-  />
-);
-
-// ============================================
-// SEARCH INPUT - DIFFERENT VARIANTS
-// ============================================
-
-// Standard Variant
-export const SearchInput: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    label="Search"
-    placeholder="Type to search..."
-    variantType="standard"
-    fullWidth
-  />
-);
-
-// Outlined Variant
-export const SearchInputOutlined: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    label="Search"
-    placeholder="Type to search..."
-    variantType="outlined"
-    fullWidth
-  />
-);
-
-// Filled Variant
-export const SearchInputFilled: React.FC<BaseInputProps> = (props) => (
-  <BaseInput
-    {...props}
-    label="Search"
-    placeholder="Type to search..."
-    variantType="filled"
-    fullWidth
-  />
-);
 
 // ============================================
 // URL INPUT - DIFFERENT VARIANTS
@@ -360,33 +245,16 @@ export const Input = {
   EmailInputOutlined,
   EmailInputFilled,
   
-  // Password Input
-  PasswordInput,
-  PasswordInputOutlined,
-  PasswordInputFilled,
-  
   
   // Number Input
   NumberInput,
   NumberInputOutlined,
   NumberInputFilled,
   
-  
   // Phone Input
   PhoneInput,
   PhoneInputOutlined,
   PhoneInputFilled,
-  
-  
-  // Description Input
-  DescriptionInput,
-  DescriptionInputOutlined,
-  DescriptionInputFilled,
-  
-  // Search Input
-  SearchInput,
-  SearchInputOutlined,
-  SearchInputFilled,
   
   // URL Input
   URLInput,

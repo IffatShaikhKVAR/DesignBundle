@@ -170,14 +170,14 @@ const CategoryComponent: React.FC<CategoryComponentProps> = ({
                 }}
               >
                 {item.component}
-                {/* {item.description && (
+                {item.description && (
                   <Typography
                     variant="caption"
                     sx={{ mt: 1, textAlign: "center", display: "block" }}
                   >
                     {item.description}
                   </Typography>
-                )} */}
+                )}
               </Box>
             </Grid>
           ))}

@@ -1,5 +1,5 @@
 // components/Charts/LineChart.tsx
-import React from "react";
+import React, { useState } from "react";
 import {
   LineChart,
   Line,
@@ -40,7 +40,7 @@ export const LineChartComponent: React.FC<LineChartProps> = ({
 }) => {
   return (
     <BaseChart title={title} data={data} height={height}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="95%" height="100%">
         <LineChart data={data}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" />}
           <XAxis dataKey="name" />
@@ -85,7 +85,7 @@ export const MultiLineChartComponent: React.FC<MultiLineChartProps> = ({
 }) => {
   return (
     <BaseChart title={title} data={data} height={height}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="95%" height="100%">
         <LineChart data={data}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" />}
           <XAxis dataKey="name" />
@@ -108,7 +108,82 @@ export const MultiLineChartComponent: React.FC<MultiLineChartProps> = ({
   );
 };
 
-export const LineCharts = {
-MultiLineChartComponent,
-LineChartComponent
+// -------------------------------
+// 🎚️ Interactive Multi Line Chart Component (with toggle)
+// -------------------------------
+export interface InteractiveMultiLineChartProps extends BaseChartProps {
+  dataKeys: string[];
+  colors?: string[];
 }
+
+/**
+ * InteractiveMultiLineChart Component
+ * Multiple lines with clickable legend to toggle data visibility
+ * Click on any legend item to hide/show that line
+ */
+export const InteractiveMultiLineChartComponent: React.FC<
+  InteractiveMultiLineChartProps
+> = ({
+  title,
+  data,
+  dataKeys,
+  height = 400,
+  colors = ["#ef4444", "#f97316", "#2575fc", "#22c55e"],
+  showLegend = true,
+  showGrid = true,
+}) => {
+  const [visibleLines, setVisibleLines] = useState<Set<string>>(
+    new Set(dataKeys)
+  );
+
+  const handleLegendClick = (e: any) => {
+    const newVisible = new Set(visibleLines);
+    if (newVisible.has(e.dataKey)) {
+      newVisible.delete(e.dataKey);
+    } else {
+      newVisible.add(e.dataKey);
+    }
+    setVisibleLines(newVisible);
+  };
+
+  return (
+    <BaseChart title={title} data={data} height={height}>
+      <ResponsiveContainer width="95%" height="100%">
+        <LineChart data={data}>
+          {showGrid && <CartesianGrid strokeDasharray="3 3" />}
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          {showLegend && (
+            <Legend
+              onClick={handleLegendClick}
+              wrapperStyle={{ cursor: "pointer" }}
+            />
+          )}
+          {dataKeys.map((key, index) => {
+            // Only render line if it's in the visible set
+            if (!visibleLines.has(key)) return null;
+
+            return (
+              <Line
+                key={key}
+                type="monotone"
+                dataKey={key}
+                stroke={colors[index % colors.length]}
+                strokeWidth={2}
+                dot={true}
+                isAnimationActive={true}
+              />
+            );
+          })}
+        </LineChart>
+      </ResponsiveContainer>
+    </BaseChart>
+  );
+};
+
+export const LineCharts = {
+  MultiLineChartComponent,
+  LineChartComponent,
+  InteractiveMultiLineChartComponent,
+};

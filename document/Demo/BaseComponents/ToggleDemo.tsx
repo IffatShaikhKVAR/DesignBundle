@@ -59,7 +59,7 @@ export const ToggleDemo: React.FC = () => {
   return (
     <ComponentDemo 
       categories={toggleCategories} 
-      packageName="design-bundle" 
+      packageName="design-bundle@latest" 
     />
   );
 };

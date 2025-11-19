@@ -120,7 +120,7 @@ const badgeCategories: DemoCategory[] = [
 
 const BadgeDemo: React.FC = () => {
   return (
-    <ComponentDemo categories={badgeCategories} packageName="design-bundle" />
+    <ComponentDemo categories={badgeCategories} packageName="design-bundle@latest" />
   );
 };
 

@@ -152,7 +152,7 @@ export { default as BaseChart } from "./UIComponents/Chart/BaseChart";
 export type { BaseChartProps } from "./UIComponents/Chart/BaseChart";
 export * from "./UIComponents/Chart/BarChart";
 export * from "./UIComponents/Chart/LineChart";
-export { PieChartComponent } from "./UIComponents/Chart/PieChart";
+export * from "./UIComponents/Chart/PieChart";
 
 // ============================================
 // Map
@@ -160,4 +160,12 @@ export { PieChartComponent } from "./UIComponents/Chart/PieChart";
 export { default as BaseMap } from "./UIComponents/Map/BaseMap";
 export type { BaseMapProps } from "./UIComponents/Map/BaseMap";
 export { LocationPinMapComponent } from "./UIComponents/Map/LocationPinMap";
+
+
+// ============================================
+// Menu
+// ============================================
+export { default as BaseMenu } from "./surfaces/Menu/BaseMenu";
+export type { BaseMenuProps } from "./surfaces/Menu/BaseMenu";
+export * from "./surfaces/Menu/MenuVariant";
 

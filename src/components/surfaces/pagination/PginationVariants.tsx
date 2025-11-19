@@ -9,6 +9,9 @@ import {
   Box,
   TextField,
   Chip,
+  MenuItem,
+  Select,
+ type SelectChangeEvent,
 } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 
@@ -382,6 +385,98 @@ export const GradientPagination: React.FC = () => {
   );
 };
 
+export const TableStylePagination: React.FC = () => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const totalItems = 42;
+
+  const handleChangeRowsPerPage = (
+  event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<number>
+) => {
+  setRowsPerPage(Number(event.target.value));
+  setPage(0);
+};
+
+
+  const handlePrev = () => setPage((prev) => Math.max(prev - 1, 0));
+  const handleNext = () =>
+    setPage((prev) =>
+      (prev + 1) * rowsPerPage < totalItems ? prev + 1 : prev
+    );
+
+  const start = page * rowsPerPage + 1;
+  const end = Math.min((page + 1) * rowsPerPage, totalItems);
+
+  return (
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="space-between"
+      spacing={2}
+      sx={{
+        border: "1px solid #e0e0e0",
+        borderRadius: "12px",
+        p: 1.5,
+        px: 2,
+        width: "fit-content",
+        backgroundColor: "#fafafa",
+      }}
+    >
+      {/* Rows per page selector */}
+      <Stack direction="row" spacing={1.5} alignItems="center">
+        <Typography variant="body2" color="textSecondary">
+          Rows per page:
+        </Typography>
+        <Select
+          value={rowsPerPage}
+          onChange={handleChangeRowsPerPage}
+          size="small"
+          sx={{
+            fontSize: "0.875rem",
+            minWidth: 70,
+            "& .MuiSelect-select": { py: 0.5 },
+          }}
+        >
+          {[5, 10, 20, 50].map((option) => (
+            <MenuItem key={option} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
+
+      {/* Range display */}
+      <Typography variant="body2" color="textSecondary">
+        {`${start}–${end} of ${totalItems}`}
+      </Typography>
+
+      {/* Navigation buttons */}
+      <Stack direction="row" spacing={0.5}>
+        <IconButton
+          size="small"
+          onClick={handlePrev}
+          disabled={page === 0}
+          sx={{
+            "&.Mui-disabled": { opacity: 0.4 },
+          }}
+        >
+          <ArrowBack fontSize="small" />
+        </IconButton>
+        <IconButton
+          size="small"
+          onClick={handleNext}
+          disabled={(page + 1) * rowsPerPage >= totalItems}
+          sx={{
+            "&.Mui-disabled": { opacity: 0.4 },
+          }}
+        >
+          <ArrowForward fontSize="small" />
+        </IconButton>
+      </Stack>
+    </Stack>
+  );
+};
+
 /* ============================================
    EXPORT ALL
    ============================================ */
@@ -396,5 +491,6 @@ export const PaginationVariants = {
   StepPagination,
   ChipPagination,
   GradientPagination,
+  TableStylePagination, // 👈 added here
 };
 

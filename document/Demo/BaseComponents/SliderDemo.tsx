@@ -66,7 +66,7 @@ export const SliderDemo: React.FC = () => {
   return (
     <ComponentDemo 
       categories={sliderCategories}
-      packageName="design-bundle"
+      packageName="design-bundle@latest"
     />
   );
 };

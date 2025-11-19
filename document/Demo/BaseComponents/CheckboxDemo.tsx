@@ -73,7 +73,7 @@ export const CheckboxDemo: React.FC = () => {
   return (
     <ComponentDemo 
       categories={checkboxCategories}
-      packageName="design-bundle"
+      packageName="design-bundle@latest"
     />
   );
 };

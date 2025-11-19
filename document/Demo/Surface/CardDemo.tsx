@@ -105,7 +105,7 @@ const cardCategories: DemoCategory[] = [
 // ========================================
 
 const CardDemo: React.FC = () => {
-  return <ComponentDemo categories={cardCategories} packageName="design-bundle" />;
+  return <ComponentDemo categories={cardCategories} packageName="design-bundle@latest" />;
 };
 
 export default CardDemo;

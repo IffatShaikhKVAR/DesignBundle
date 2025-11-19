@@ -1,38 +1,127 @@
-// pages/SidebarDemo.tsx
+// ========================================
+// 🎨 SidebarDemo.tsx
+// ========================================
 import React, { useState } from "react";
-import { Box, Button, Typography, Container } from "@mui/material";
-import {BasicSidebar} from "../../../src/components";
-import {CollapsibleSidebar} from "../../../src/components";
-import {MiniSidebar} from "../../../src/components";
-import {GradientSidebar} from "../../../src/components";
+import {
+  Box,
+  Button,
+  Typography,
+  Container,
+} from "@mui/material";
+import {
+  Dashboard,
+  Settings,
+  Notifications,
+  People,
+  Folder,
+  Info,
+} from "@mui/icons-material";
+
+import { BasicSidebar } from "../../../src/components";
+import { CollapsibleSidebar } from "../../../src/components";
+import { MiniSidebar } from "../../../src/components";
+import { GradientSidebar } from "../../../src/components";
 
 const SidebarDemo: React.FC = () => {
   const [selectedSidebar, setSelectedSidebar] = useState<string>("basic");
 
+  // ===========================
+  // 🧭 Demo Sidebar Items
+  // ===========================
+  const sidebarItems = [
+    {
+      id: "dashboard",
+      label: "Dashboard",
+      icon: <Dashboard />,
+      onClick: () => alert("Dashboard clicked"),
+    },
+    {
+      id: "users",
+      label: "Users",
+      icon: <People />,
+      children: [
+        { id: "active-users", label: "Active Users" },
+        { id: "pending-users", label: "Pending Requests" },
+      ],
+    },
+    {
+      id: "projects",
+      label: "Projects",
+      icon: <Folder />,
+      children: [
+        { id: "ongoing", label: "Ongoing" },
+        { id: "completed", label: "Completed" },
+      ],
+    },
+    {
+      id: "notifications",
+      label: "Notifications",
+      icon: <Notifications />,
+      badge: 5,
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      icon: <Settings />,
+    },
+    {
+      id: "about",
+      label: "About",
+      icon: <Info />,
+    },
+  ];
+
+  // ===========================
+  // 🧩 Sidebar Variants
+  // ===========================
   const sidebars = [
     {
       id: "basic",
       name: "Basic Sidebar",
       description: "Standard static sidebar with items",
-      component: <BasicSidebar />,
+      component: (
+        <BasicSidebar
+          items={sidebarItems}
+          logoText="Basic Sidebar"
+          onItemClick={(id) => console.log("Clicked:", id)}
+        />
+      ),
     },
     {
       id: "collapsible",
       name: "Collapsible Sidebar",
       description: "Sidebar that expands and collapses",
-      component: <CollapsibleSidebar />,
+      component: (
+        <CollapsibleSidebar
+          items={sidebarItems}
+          logoText="Collapsible"
+          userName="Admin User"
+          onItemClick={(id) => console.log("Clicked:", id)}
+        />
+      ),
     },
     {
       id: "mini",
       name: "Mini Sidebar",
       description: "Compact icon-only sidebar",
-      component: <MiniSidebar />,
+      component: (
+        <MiniSidebar
+          items={sidebarItems}
+          onItemClick={(id) => console.log("Clicked:", id)}
+        />
+      ),
     },
     {
       id: "gradient",
       name: "Gradient Sidebar",
       description: "Modern gradient background sidebar",
-      component: <GradientSidebar />,
+      component: (
+        <GradientSidebar
+          items={sidebarItems}
+          logoText="Gradient"
+          onItemClick={(id) => console.log("Clicked:", id)}
+        />
+      ),
     },
   ];
 
@@ -41,11 +130,9 @@ const SidebarDemo: React.FC = () => {
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
       {/* Sidebar Preview */}
-      <Box sx={{ flex: 1 }}>
-        {currentSidebar?.component}
-      </Box>
+      <Box sx={{ flexShrink: 0 }}>{currentSidebar?.component}</Box>
 
-      {/* Content Area */}
+      {/* Main Content Area */}
       <Box
         sx={{
           flex: 1,
@@ -64,11 +151,20 @@ const SidebarDemo: React.FC = () => {
           </Typography>
 
           {/* Sidebar Selection Buttons */}
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 4 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              mb: 4,
+            }}
+          >
             {sidebars.map((sidebar) => (
               <Button
                 key={sidebar.id}
-                variant={selectedSidebar === sidebar.id ? "contained" : "outlined"}
+                variant={
+                  selectedSidebar === sidebar.id ? "contained" : "outlined"
+                }
                 onClick={() => setSelectedSidebar(sidebar.id)}
                 fullWidth
                 sx={{
@@ -88,18 +184,6 @@ const SidebarDemo: React.FC = () => {
               </Button>
             ))}
           </Box>
-
-          {/* Current Sidebar Info */}
-          {/* {currentSidebar && (
-            <Box sx={{ p: 2, backgroundColor: "white", borderRadius: 2 }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>
-                {currentSidebar.name}
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                {currentSidebar.description}
-              </Typography>
-            </Box>
-          )} */}
         </Container>
       </Box>
     </Box>

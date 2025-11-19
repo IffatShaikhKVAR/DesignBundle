@@ -20,6 +20,8 @@ import CalenderDemo from "../document/Demo/DataDisplay/CalenderDemo";
 import AlertDemo from "../document/Demo/feedbackComponents/AlertDemo";
 import ModalDemo from "../document/Demo/Surface/ModalDemo";
 import PaginationDemo from "../document/Demo/Surface/PaginationDemo";
+import MenuDemo from "../document/Demo/Surface/MenuDemo";
+import ChartDemo from "../document/Demo/UiComponents/ChartDemo";
 
 const App: React.FC = () => {
   return (
@@ -45,6 +47,8 @@ const App: React.FC = () => {
         <Route path="appBar" element={<AppBarDemo />} />
         <Route path="modal" element={<ModalDemo />} />
         <Route path="pagination" element={<PaginationDemo />} />
+        <Route path="menu" element={<MenuDemo />} />
+        <Route path="chart" element={<ChartDemo />} />
         {/* Placeholder route */}
         <Route path="card" element={<CardDemo />} />
 

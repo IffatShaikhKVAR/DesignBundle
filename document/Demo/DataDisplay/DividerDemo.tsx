@@ -94,7 +94,7 @@ const dividerCategories: DemoCategory[] = [
  * Divider Demo Page
  */
 const DividerDemo: React.FC = () => {
-  return <ComponentDemo categories={dividerCategories} packageName="design-bundle" />;
+  return <ComponentDemo categories={dividerCategories} packageName="design-bundle@latest" />;
 };
 
 export default DividerDemo;

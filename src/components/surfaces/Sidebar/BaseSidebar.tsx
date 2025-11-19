@@ -1,5 +1,8 @@
+// ========================================
+// 📦 BasicSidebar - Reusable Component
+// ========================================
 // components/Sidebars/BasicSidebar.tsx
-import React from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   List,
@@ -7,56 +10,185 @@ import {
   ListItemIcon,
   ListItemButton,
   ListItemText,
-  Toolbar,
-  Typography,
   Box,
+  Collapse,
+  Chip,
+  Avatar,
+  Divider,
+  Typography,
 } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import SettingsIcon from "@mui/icons-material/Settings";
-import PersonIcon from "@mui/icons-material/Person";
-import DeviceHubIcon from "@mui/icons-material/DeviceHub";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
-const drawerWidth = 240;
+export interface SidebarItemConfig {
+  id: string;
+  label: string;
+  icon?: React.ReactNode;
+  onClick?: () => void;
+  badge?: string | number;
+  children?: SidebarItemConfig[];
+}
 
-const BasicSidebar: React.FC = () => {
-  const items = [
-    { text: "Dashboard", icon: <DashboardIcon /> },
-    { text: "User Settings", icon: <PersonIcon /> },
-    { text: "Device Settings", icon: <DeviceHubIcon /> },
-    { text: "Company Settings", icon: <SettingsIcon /> },
-  ];
+export interface BasicSidebarProps {
+  items: SidebarItemConfig[];
+  logo?: string;
+  logoText?: string;
+  width?: number;
+  backgroundColor?: string;
+  textColor?: string;
+  onItemClick?: (itemId: string) => void;
+  showBorder?: boolean;
+}
+
+export const BasicSidebar: React.FC<BasicSidebarProps> = ({
+  items,
+  logo,
+  logoText = "Design Bundle",
+  width = 280,
+  backgroundColor = "#f7f9fcff",
+  textColor = "#6caedaff",
+  onItemClick,
+  showBorder = true,
+}) => {
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+
+  const toggleExpand = (itemId: string) => {
+    const newExpanded = new Set(expandedItems);
+    if (newExpanded.has(itemId)) {
+      newExpanded.delete(itemId);
+    } else {
+      newExpanded.add(itemId);
+    }
+    setExpandedItems(newExpanded);
+  };
+
+  const handleItemClick = (itemId: string) => {
+    onItemClick?.(itemId);
+  };
+
+  const renderItems = (itemList: SidebarItemConfig[], depth = 0) => {
+    return itemList.map((item) => (
+      <React.Fragment key={item.id}>
+        <ListItem
+          disablePadding
+          sx={{
+            pl: depth * 2,
+            "&:hover": {
+              backgroundColor: `${textColor}15`,
+            },
+          }}
+        >
+          <ListItemButton
+            onClick={() => {
+              if (item.children && item.children.length > 0) {
+                toggleExpand(item.id);
+              } else {
+                handleItemClick(item.id);
+              }
+            }}
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              transition: "all 0.2s ease",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+              {item.icon && (
+                <ListItemIcon
+                  sx={{
+                    color: `${textColor}cc`,
+                    minWidth: 40,
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
+              )}
+              <ListItemText
+                primary={item.label}
+                sx={{
+                  "& .MuiListItemText-primary": {
+                    fontSize: "0.95rem",
+                    fontWeight: 500,
+                    color: textColor,
+                  },
+                }}
+              />
+            </Box>
+            {item.badge && (
+              <Chip
+                label={item.badge}
+                size="small"
+                sx={{
+                  backgroundColor: "#ff5252",
+                  color: "white",
+                  height: 20,
+                  fontSize: "0.75rem",
+                  mr: 1,
+                }}
+              />
+            )}
+            {item.children && item.children.length > 0 && (
+              <Box sx={{ color: `${textColor}99` }}>
+                {expandedItems.has(item.id) ? (
+                  <ExpandLessIcon fontSize="small" />
+                ) : (
+                  <ExpandMoreIcon fontSize="small" />
+                )}
+              </Box>
+            )}
+          </ListItemButton>
+        </ListItem>
+
+        {item.children && item.children.length > 0 && (
+          <Collapse in={expandedItems.has(item.id)} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {renderItems(item.children, depth + 1)}
+            </List>
+          </Collapse>
+        )}
+      </React.Fragment>
+    ));
+  };
 
   return (
     <Drawer
       sx={{
-        width: drawerWidth,
+        width,
         flexShrink: 0,
         "& .MuiDrawer-paper": {
-          width: drawerWidth,
-          backgroundColor: "#0d2340",
-          color: "#fff",
-          boxShadow: 3,
+          width,
+          backgroundColor,
+          color: textColor,
+          boxShadow: "2px 0 8px rgba(0, 0, 0, 0.15)",
+          border: showBorder ? "1px solid rgba(255, 255, 255, 0.1)" : "none",
         },
       }}
       variant="permanent"
       anchor="left"
     >
-      <Toolbar>
-        <Typography variant="h6" sx={{ color: "#fff" }}>
-          KVAR Cloud
+      <Box
+        sx={{
+          p: 2,
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+          borderBottom: `1px solid ${textColor}15`,
+        }}
+      >
+        {logo && <Avatar src={logo} sx={{ width: 32, height: 32 }} />}
+        <Typography
+          variant="h6"
+          sx={{
+            color: textColor,
+            fontWeight: 600,
+            fontSize: "1.1rem",
+          }}
+        >
+          {logoText}
         </Typography>
-      </Toolbar>
-      <Box sx={{ overflow: "auto" }}>
-        <List>
-          {items.map((item) => (
-             <ListItem key={item.text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+      </Box>
+      <Box sx={{ overflow: "auto", flex: 1, p: 1 }}>
+        <List>{renderItems(items)}</List>
       </Box>
     </Drawer>
   );

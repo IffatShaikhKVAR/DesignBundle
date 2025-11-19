@@ -154,7 +154,7 @@ export const ButtonDemo: React.FC = () => {
   return (
     <ComponentDemo 
       categories={buttonCategories} 
-      packageName="design-bundle"
+      packageName="design-bundle@latest"
     />
   );
 };

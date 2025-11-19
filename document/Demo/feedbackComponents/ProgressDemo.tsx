@@ -180,7 +180,7 @@ const progressCategories: DemoCategory[] = [
 
 const ProgressDemo: React.FC = () => {
   return (
-    <ComponentDemo categories={progressCategories} packageName="design-bundle" />
+    <ComponentDemo categories={progressCategories} packageName="design-bundle@latest" />
   );
 };
 

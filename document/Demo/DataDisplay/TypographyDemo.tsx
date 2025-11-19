@@ -317,7 +317,7 @@ export const TypographyDemo: React.FC = () => {
   return (
     <ComponentDemo
       categories={typographyCategories}
-      packageName="design-bundle"
+      packageName="design-bundle@latest"
     />
   );
 };

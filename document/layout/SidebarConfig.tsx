@@ -58,7 +58,16 @@ export const categories: Category[] = [
       { text: "Modal", path: "/modal", icon: <NotificationsActiveIcon /> },
       { text: "App Bar", path: "/appBar", icon: <NotificationsActiveIcon /> },
       { text: "Side Bar", path: "/sideBar", icon: <NotificationsActiveIcon /> },
+      { text: "Menu", path: "/menu", icon: <NotificationsActiveIcon /> },
        { text: "Pagination", path: "/pagination", icon: <NotificationsActiveIcon /> },
+    ],
+  },
+
+   {
+    title: "UI Components",
+    items: [
+      { text: "Chart", path: "/chart", icon: <NotificationsActiveIcon /> },
+     
     ],
   },
 ];

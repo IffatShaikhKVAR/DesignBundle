@@ -38,12 +38,49 @@ const paginationCategories: DemoCategory[] = [
         component: <PaginationVariants.LoadMorePagination />,
         description: "Load more button-style pagination for continuous lists.",
       },
+      {
+        id: "pagination-dot",
+        name: "DotPagination",
+        component: <PaginationVariants.DotPagination />,
+        description: "Dot-based pagination ideal for carousels or sliders.",
+      },
+      {
+        id: "pagination-input",
+        name: "InputPagination",
+        component: <PaginationVariants.InputPagination />,
+        description: "Allows direct page input for fast navigation.",
+      },
+      {
+        id: "pagination-step",
+        name: "StepPagination",
+        component: <PaginationVariants.StepPagination />,
+        description: "Step-based pagination to show progress or workflow.",
+      },
+      {
+        id: "pagination-chip",
+        name: "ChipPagination",
+        component: <PaginationVariants.ChipPagination />,
+        description: "Chip-style pagination with selectable page chips.",
+      },
+      {
+        id: "pagination-gradient",
+        name: "GradientPagination",
+        component: <PaginationVariants.GradientPagination />,
+        description: "Modern gradient pagination with smooth hover effects.",
+      },
+      {
+        id: "pagination-table",
+        name: "TableStylePagination",
+        component: <PaginationVariants.TableStylePagination />,
+        description:
+          "Table-style pagination with rows-per-page dropdown and record range display.",
+      },
     ],
   },
 ];
 
 const PaginationDemo: React.FC = () => (
-  <ComponentDemo categories={paginationCategories} packageName="design-bundle" />
+  <ComponentDemo categories={paginationCategories} packageName="design-bundle@latest" />
 );
 
 export default PaginationDemo;

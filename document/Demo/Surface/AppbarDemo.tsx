@@ -57,7 +57,7 @@ const appBarCategories: DemoCategory[] = [
 ];
 
 const AppBarDemo: React.FC = () => (
-  <ComponentDemo categories={appBarCategories} packageName="design-bundle" />
+  <ComponentDemo categories={appBarCategories} packageName="design-bundle@latest" />
 );
 
 export default AppBarDemo;

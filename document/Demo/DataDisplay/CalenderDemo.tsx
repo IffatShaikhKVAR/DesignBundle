@@ -67,7 +67,7 @@ const calendarCategories: DemoCategory[] = [
 
 const CalendarDemo: React.FC = () => {
   return (
-    <ComponentDemo categories={calendarCategories} packageName="design-bundle" />
+    <ComponentDemo categories={calendarCategories} packageName="design-bundle@latest" />
   );
 };
 

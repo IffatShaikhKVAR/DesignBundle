@@ -61,25 +61,6 @@ const inputCategories: DemoCategory[] = [
         description: "Filled variant for email entry.",
       },
 
-      // Password Inputs
-      {
-        id: "password-standard",
-        name: "PasswordInput",
-        component: <Input.PasswordInput />,
-        description: "Standard password input with masking.",
-      },
-      {
-        id: "password-outlined",
-        name: "PasswordInputOutlined",
-        component: <Input.PasswordInputOutlined />,
-        description: "Outlined password input.",
-      },
-      {
-        id: "password-filled",
-        name: "PasswordInputFilled",
-        component: <Input.PasswordInputFilled />,
-        description: "Filled password input variant.",
-      },
 
       // Number Inputs
       {
@@ -121,45 +102,6 @@ const inputCategories: DemoCategory[] = [
         description: "Filled phone input.",
       },
 
-      // Description Inputs
-      {
-        id: "description-standard",
-        name: "DescriptionInput",
-        component: <Input.DescriptionInput />,
-        description: "Standard description input.",
-      },
-      {
-        id: "description-outlined",
-        name: "DescriptionInputOutlined",
-        component: <Input.DescriptionInputOutlined />,
-        description: "Outlined description input.",
-      },
-      {
-        id: "description-filled",
-        name: "DescriptionInputFilled",
-        component: <Input.DescriptionInputFilled />,
-        description: "Filled description input.",
-      },
-
-      // Search Inputs
-      {
-        id: "search-standard",
-        name: "SearchInput",
-        component: <Input.SearchInput />,
-        description: "Standard search input.",
-      },
-      {
-        id: "search-outlined",
-        name: "SearchInputOutlined",
-        component: <Input.SearchInputOutlined />,
-        description: "Outlined search input.",
-      },
-      {
-        id: "search-filled",
-        name: "SearchInputFilled",
-        component: <Input.SearchInputFilled />,
-        description: "Filled search input.",
-      },
 
       // URL Inputs
       {
@@ -352,7 +294,7 @@ const inputCategories: DemoCategory[] = [
 // ========================================
 
 const InputDemo: React.FC = () => {
-  return <ComponentDemo categories={inputCategories} packageName="design-bundle" />;
+  return <ComponentDemo categories={inputCategories} packageName="design-bundle@latest" />;
 };
 
 export default InputDemo;

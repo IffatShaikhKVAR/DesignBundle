@@ -211,7 +211,7 @@ const tableCategories: DemoCategory[] = [
  */
 const TableDemo: React.FC = () => {
   return (
-    <ComponentDemo categories={tableCategories} packageName="design-bundle" />
+    <ComponentDemo categories={tableCategories} packageName="design-bundle@latest" />
   );
 };
 
